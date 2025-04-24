@@ -7,11 +7,13 @@ const Header = () => {
     <div>
       <Navbar expand="lg" style={{ backgroundColor: 'rgba(0, 123, 255, 0.85)' }} variant="dark">
         <Container>
-          <Navbar.Brand href="#">📚 Book Hive</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">
+            📚 Book Hive
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="bookhive-navbar" />
           <Navbar.Collapse id="bookhive-navbar" className="justify-content-between">
             <Form className="d-flex mx-auto" style={{ maxWidth: '400px', width: '100%' }}>
-
+              {/* You can put a search bar here if needed */}
             </Form>
             <Nav>
               <Link to="/Sell" className="btn btn-outline-light ms-2">Sell Book</Link>
@@ -20,9 +22,7 @@ const Header = () => {
             <Nav>
               <Link to="/login" className="btn btn-outline-light ms-2">Login</Link>
               <Link to="/Signup" className="btn btn-outline-light ms-2">Sign Up</Link>
-              
             </Nav>
-
           </Navbar.Collapse>
         </Container>
       </Navbar>
