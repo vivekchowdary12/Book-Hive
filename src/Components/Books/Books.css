@@ -1,0 +1,55 @@
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1 1 30%;
+    max-width: 300px;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Responsive container for wrapping cards */
+  .cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  /* Medium screens: tablets (2 columns) */
+  @media (max-width: 991.98px) {
+    .card {
+      flex: 1 1 45%;
+    }
+  }
+  
+  /* Small screens: mobile (1 column) */
+  @media (max-width: 767.98px) {
+    .card {
+      flex: 1 1 90%;
+      max-width: 100%;
+    }
+  
+    .form-select {
+      width: 100% !important;
+    }
+  
+    .card-body {
+      padding: 1rem;
+    }
+  
+    .card img {
+      height: 200px !important;
+    }
+  }
+  
