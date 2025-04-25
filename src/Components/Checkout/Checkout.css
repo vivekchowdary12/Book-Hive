@@ -1,0 +1,38 @@
+.checkout-container {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 30px;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 500px; /* Increased the max-width of the cards */
+    margin: 0 auto; /* Center the card */
+    border-radius: 12px;
+  }
+  
+  .card img {
+    border-radius: 8px;
+    max-height: 200px; /* Control the height of the image */
+  }
+  
+  .card h5 {
+    font-size: 18px;
+  }
+  
+  .card p {
+    font-size: 14px;
+  }
+  
+  .card .card-body {
+    padding: 20px;
+  }
+  
+  .card .form-control {
+    border-radius: 8px;
+  }
+  
+  .card-body .btn {
+    border-radius: 8px;
+  }
+  

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Books.css';
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const genres = [
   { label: 'Fiction', value: 'fiction' },
@@ -18,13 +20,18 @@ const Books = () => {
   const [books, setBooks] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState('fiction');
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBooks = async () => {
       setLoading(true);
       try {
         const res = await axios.get(`https://openlibrary.org/subjects/${selectedGenre}.json?limit=9`);
-        setBooks(res.data.works);
+        const booksWithPrices = res.data.works.map((book) => ({
+          ...book,
+          price: (Math.random() * 30 + 5).toFixed(2),
+        }));
+        setBooks(booksWithPrices);
       } catch (error) {
         console.error('Error fetching books:', error);
       }
@@ -34,14 +41,17 @@ const Books = () => {
     fetchBooks();
   }, [selectedGenre]);
 
-  const getRandomPrice = () => {
-    const price = (Math.random() * 30 + 5).toFixed(2);
-    return `$${price}`;
+  const handleAddToCart = (book) => {
+    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const updatedCart = [...existingCart, book];
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    alert(`${book.title} added to cart!`);
   };
 
   return (
     <div className="container my-4">
-      <div className="d-flex justify-content-center mb-4">
+      {/* Header: Genre Selector + Checkout Button */}
+      <div className="d-flex justify-content-between align-items-center mb-4">
         <select
           className="form-select"
           style={{ width: '350px' }}
@@ -54,6 +64,10 @@ const Books = () => {
             </option>
           ))}
         </select>
+
+        <Button variant="success" onClick={() => navigate('/checkout')}>
+          Go to Checkout
+        </Button>
       </div>
 
       {loading ? (
@@ -61,7 +75,7 @@ const Books = () => {
           <div className="spinner-border text-primary" role="status" />
         </div>
       ) : (
-        <div className="cards-wrapper">
+        <div className="cards-wrapper d-flex flex-wrap justify-content-center gap-4">
           {books.map((book, index) => (
             <div
               key={index}
@@ -110,12 +124,12 @@ const Books = () => {
                     <strong>Title:</strong> {book.title}
                   </p>
                   <p className="card-text text-success">
-                    <strong>Price:</strong> {getRandomPrice()}
+                    <strong>Price:</strong> ${book.price}
                   </p>
                 </div>
-                <button className="btn btn-sm btn-info mt-3 text-white fw-semibold" style={{ backgroundColor: '#5bc0de' }}>
-                  Buy Now
-                </button>
+                <Button variant="primary" onClick={() => handleAddToCart(book)}>
+                  Add to Cart
+                </Button>
               </div>
             </div>
           ))}

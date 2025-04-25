@@ -6,6 +6,7 @@ import Carosel from '../Components/Carosel/Carosel.jsx';
 import Books from '../Components/Books/Books.jsx';
 import Footer from '../Components/Footer/Footer.jsx';
 import SignUp from '../Components/Signup/Signup.jsx';
+import Checkout from '../Components/Checkout/Checkout.jsx';
 
 const RoutesComponent = () => {
   return (
@@ -23,6 +24,7 @@ const RoutesComponent = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/Sell" element={<Sell />} />
       <Route path='/Signup' element={<SignUp />} />
+      <Route path='/Checkout' element={<Checkout />} />
     </Routes>
   );
 };
